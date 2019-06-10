@@ -1,0 +1,58 @@
+/* 用户信息 */
+
+.user {
+  position: relative;
+  width: 100%;
+  margin-bottom: 150rpx;
+}
+
+.user-header {
+  display: flex;
+  padding-top: 1px;
+  width: 100%;
+  height: 310rpx;
+  align-content: center;
+  background-color: #f9f9f9;
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: auto 100%;
+}
+
+.user-header .user-header-cont {
+  display: flex;
+  margin: auto;
+  margin-bottom: 85rpx;
+  width: 79%;
+  align-items: center;
+}
+
+.user-header .user-header-cont .user-header-avatar {
+  display: block;
+  margin-right: 90rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  border: 5rpx solid rgb(83, 83, 83);
+  overflow: hidden;
+}
+.order-navbar {
+  position: absolute;
+  /* left: 19rpx; */
+  top: 280rpx;
+  margin: auto;
+  padding: 38rpx 0;
+  width: 100%;
+  box-shadow: 0 1rpx 5rpx 0px rgba(0, 0, 0, 0.05);
+  font-size: 30rpx;
+  border-top: 1rpx solid #eee;
+  border-radius: 5rpx;
+  background: #fff;
+}
+
+.order-navbar-header {
+  margin: auto;
+  width: 86%;
+  height: 70rpx;
+  justify-content: space-between;
+  align-items: center;
+}

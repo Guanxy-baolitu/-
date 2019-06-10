@@ -1,0 +1,10 @@
+<scroll-view scroll-y style='height : 100vh;'>
+  <view wx:for="{{albumPages}}" wx:key="unique">
+    <image mode="widthFix" class="albumPage" src="{{item}}"></image>
+  </view>
+  <!-- 底线 -->
+  <view class="title-footer p-r" style='margin-bottom:45rpx;'>
+    <text class="f-34 col-9 cont">到底啦</text>
+    <view class="hr"></view>
+  </view>
+</scroll-view>

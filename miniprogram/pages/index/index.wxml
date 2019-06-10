@@ -1,0 +1,29 @@
+<!--index.wxml-->
+<view class="container">
+  <scroll-view scroll-y bindscroll="scroll" scroll-into-view="{{toView}}">
+    <view wx:for="{{swiperList}}" wx:key="unique">
+      <view class="page-section page-section-spacing swiper">
+        <swiper current="{{current}}" indicator-dots="{{false}}" autoplay circular interval="3000" duration="1000" previous-margin="20px" next-margin="20px" style="height: 1000rpx;">
+          <block wx:for="{{item.images}}" wx:key="*this">
+            <swiper-item class="img">
+              <image class='swiper-item' src="{{item}}" />
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+      <view class="order-navbar">
+        <view class="order-navbar-header dis-flex">
+          <text class="f-50">{{item.title}}</text>
+          <view class="dis-flex flex-y-center">
+            <text class="f-38 col-6 pinkButton" data-value="{{item.template}}" bindtap="useTemplate">使用此模板</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 底线 -->
+    <view class="title-footer p-r">
+      <text class="f-34 col-9 cont">到底啦</text>
+      <view class="hr"></view>
+    </view>
+  </scroll-view>
+</view>

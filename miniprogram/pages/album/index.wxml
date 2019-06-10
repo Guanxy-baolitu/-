@@ -1,0 +1,32 @@
+<view class="container">
+  <!-- <scroll-view bindscroll="scroll" scroll-top="{{scrollTop}}" scroll-y="true"> -->
+    <view class="title-header m-top4">选择模板</view>
+
+    <view class="category-list">
+  <view class="list b-f" hover-class="none" wx:for="{{templateList}}" wx:key="this">
+    <view class="left">
+      <view class="img">
+        <image class="goodsImg" mode="scaleToFill" data-value="{{item.template}}" bindtap='chooseImage' src="{{item.img}}"></image>
+      </view>
+    </view>
+    <view class="right">
+      <view class="cont">
+        <text class="f-30 title twolist-hidden m-top10">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+    <!-- 底线 -->
+    <view class="title-footer p-r">
+      <text class="f-34 col-9 cont">到底啦</text>
+      <view class="hr"></view>
+    </view>
+  <!-- </scroll-view> -->
+
+  <!-- 返回顶部 -->
+  <view bindtap="goTop" class="widget-goTop" wx:if="{{floorstatus}}">
+    <text class="iconfont icon-fanhuidingbu"></text>
+  </view>
+
+</view>

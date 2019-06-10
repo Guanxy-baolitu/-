@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 配送地址 -->
+  <view catchtap="selectAddress" style='width:100%;'>
+    <view class="order-navbar">
+      <button bindtap='editAddress' class="btn-normal">
+        <view class="order-navbar-header dis-flex">
+          <text class="iconfont icon-dingwei1 user-orderJtou"></text>
+          <view wx:if="{{address_show}}">
+            <text class="f-50">修改配送地址</text>
+          </view>
+          <view wx:else>
+            <text class="f-50">新增配送地址</text>
+          </view>
+          <view class="dis-flex flex-y-center">
+            <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
+          </view>
+        </view>
+      </button>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="m-top20" style='width:100%;'>
+    <view class="dis-flex flow-shopList">
+        <image mode="aspectFill" style='width:38%; height:240rpx;' src="{{albumCover}}"></image>
+      <view class="flow-list-right checkout_list">
+        <text class="col-3 twolist-hidden">{{albumTitle}}</text>
+        <text class="col-3 f-38 twolist-hidden">共{{albumPageNum}}页</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品金额 -->
+  <view class="flow-all-money b-f padding-box m-top20" style='width:100%;'>
+    <view class="dis-flex flow-all-list">
+      <text class="flex-five f-50">印刷价格:</text>
+      <view class="flex-five t-r">
+        <text class="col-m">￥{{order_total_price}}</text>
+      </view>
+    </view>
+    <view class="dis-flex flow-all-list">
+      <text class="flex-five f-50">配送费用:</text>
+      <view class="flex-five t-r">
+        <view wx:if="{{address.address_id}}">
+          <text class="col-m" wx:if="{{intra_region}}">+￥{{express_price}}</text>
+          <text wx:else>不在配送范围</text>
+        </view>
+        <view wx:else>
+          <text class="f-40 col-7">请先选择配送地址</text>
+        </view>
+      </view>
+    </view>
+    <view class="dis-flex flow-all-list">
+      <text class="flex-five f-50">商品总金额:</text>
+      <view class="flex-five t-r">
+        <text class="col-m">￥{{order_total_price}}</text>
+      </view>
+    </view>
+  </view>
+
+<scroll-view scroll-y class="b-f padding-box m-top20" style='height:360rpx;' >
+    <view class="categoryList" wx:for="{{categoryList}}" wx:for-index="key" wx:key="unique">
+      <text class='wxSearchTitle f-38'>{{key}}</text>
+      <view class="wxSearchKeyList">
+        <text class="f-38 {{item.selected?'wxSearchKeyItem-select':'wxSearchKeyItem'}}" data-key="{{key}}" data-value="{{item.value}}" wx:for="{{item}}" bindtap="tapCat" wx:key="unique">{{item.value}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="clean-order-navbar" style='position:fixed; bottom:0;'>
+    <view class="order-navbar-header dis-flex">
+      <view class="f-50">合计
+        <text class="col-m">￥{{order_pay_price}}</text>
+      </view>
+      <view class="dis-flex flex-y-center">
+        <text class="f-38 col-6 pinkButton" bindtap="submitOrder">提交订单</text>
+      </view>
+    </view>
+  </view>
+
+</view>

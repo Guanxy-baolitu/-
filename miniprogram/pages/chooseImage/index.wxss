@@ -1,0 +1,73 @@
+.cate-right {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.cate-right-cont {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  margin-top: 26rpx;
+}
+.cate-cont-box .cate-img {
+  padding: 13rpx 10rpx 4rpx 10rpx;
+}
+
+.cate-cont-box .cate-img image {
+  width: 100%;
+  height: 220rpx;
+  border-top: 1rpx solid #eee;
+  border-radius: 25rpx;
+  box-shadow: 0 1rpx 5rpx 0px rgba(0, 0, 0, 0.05);
+  background: #fff;
+}
+
+.cate-cont-box text {
+  text-align: center;
+  display: block;
+  font-size: 26rpx;
+  padding-bottom: 14rpx;
+  color: #444;
+  padding: 0 15rpx 30rpx 15rpx;
+}
+
+.cate-two-box {
+  width: 100%;
+  padding: 0 10px;
+}
+
+.order-navbar {
+  margin: auto;
+  padding: 38rpx 0;
+  line-height: 100rpx;
+  font-weight: 700;
+  font-size: 48rpx;
+  width: 100%;
+}
+
+.order-navbar-header {
+  margin: auto;
+  height: 70rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+.address-box .left-name {
+  font-weight: 700;
+  width: 30%;
+}
+
+.address-cont-title .list {
+  width: auto;
+  padding: 24rpx;
+}
+.deleteButton{
+  position:relative;
+  top: -250rpx;
+  left:170rpx;
+  width: 48rpx;
+  height: 48rpx;
+}

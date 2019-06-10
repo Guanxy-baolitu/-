@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="order-navbar-header dis-flex inputBlock">
+    <text class="f-50" style='width:35%; font-weight:700;'>相册名称</text>
+    <view class="dis-flex flex-y-center" style='width:65%;'>
+      <input class="f-50" name="name" placeholder="请输入相册名称" value=""bindinput="getAlbumName"></input>
+    </view>
+  </view>
+
+  <view class="cate-right-cont">
+    <view class="cate-two-box">
+      <view class="cate-cont-box">
+        <view class="flex-three" wx:for="{{imageFilePaths}}" wx:key="*this" wx:for-index="key">
+          <view class="cate-img">
+            <image mode="aspectFill" data-key="{{key}}" bindtap="handleImagePreview" src="{{item}}"></image>
+          </view>
+          <image bindtap="deleteImage" data-key="{{key}}" class="deleteButton" src="../../images/delete.png"></image>
+        </view>
+        <view class="flex-three">
+          <view class="cate-img">
+            <image bindtap="addImage" src="../../images/add.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="order-navbar" style='margin-top:40rpx;'>
+    <view class="order-navbar-header dis-flex">
+      <view class="dis-flex flex-y-center">
+        <text class="f-38 col-6 widePinkButton" data-value="{{item.template}}" bindtap="uploadAndMakeAlbum">开始制作</text>
+      </view>
+    </view>
+  </view>
+</view>

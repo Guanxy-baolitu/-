@@ -1,0 +1,33 @@
+<view class="container">
+<view class="order-navbar-header dis-flex inputBlock">
+    <text class="f-50" style='width:35%; font-weight:700;'>收货人：</text>
+    <view class="dis-flex flex-y-center" style='width:65%;'>
+      <input class="f-50" name="name" placeholder="收货人姓名" bindinput="getPerson" value="{{address.address_show}}?{{address.address_name}}:''"></input>
+    </view>
+  </view>
+  <view class="order-navbar-header dis-flex inputBlock">
+    <text class="f-50" maxlength="11" type="number" value="{{address.address_show}}?{{address.address_phone}}:''" style='width:35%; font-weight:700;'>手机号：</text>
+    <view class="dis-flex flex-y-center" style='width:65%;'>
+      <input class="f-50" name="name" placeholder="收货人联系电话" bindinput="getPhone" value=""></input>
+    </view>
+  </view>
+  <view class="order-navbar-header dis-flex inputBlock">
+    <text class="f-50" style='width:35%; font-weight:700;'>所在地区：</text>
+    <view class="dis-flex flex-y-center" style='width:65%;'>
+      <input class="f-50" name="name" placeholder="省、市、区" value="{{address.address_show}}?{{address.address_region}}:''" bindinput="getRegion"></input>
+    </view>
+  </view>
+  <view class="order-navbar-header dis-flex inputBlock">
+    <text class="f-50" style='width:35%; font-weight:700;'>详细地址：</text>
+    <view class="dis-flex flex-y-center" style='width:65%;'>
+      <input class="f-50" name="name" placeholder="街道小区楼层" value="{{address.address_show}}?{{address.address_detail}}:''" bindinput="getDetail"></input>
+    </view>
+  </view>
+    <view class="order-navbar" style='margin-top:40rpx;'>
+    <view class="order-navbar-header dis-flex">
+      <view class="dis-flex flex-y-center">
+        <text class="f-38 col-6 widePinkButton" data-value="{{item.template}}" bindtap="confirmAddress">确认收货地址</text>
+      </view>
+    </view>
+  </view>
+</view>

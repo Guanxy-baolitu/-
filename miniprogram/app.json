@@ -1,0 +1,41 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/album/index",
+    "pages/chooseImage/index",
+    "pages/albumDetail/index",
+    "pages/shareGuest/index",
+    "pages/print/index",
+    "pages/printAddress/index",
+    "pages/user/index",
+    "pages/userOrder/index"
+  ],
+  "tabBar": {
+    "color": "#FFFFFF",
+    "selectedColor": "#EE1376",
+    "borderStyle": "black",
+    "backgroundColor": "#061526",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/album/index",
+        "text": "制作影集"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#061526",
+    "navigationBarTitleText": "云游",
+    "navigationBarTextStyle": "white"
+  },
+  "sitemapLocation": "sitemap.json"
+}

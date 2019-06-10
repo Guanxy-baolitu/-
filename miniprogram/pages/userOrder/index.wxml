@@ -1,0 +1,15 @@
+<view class="container">
+  <!-- 商品列表 -->
+  <view class="m-top20 order-item">
+    <view class="dis-flex flow-shopList">
+        <image mode="aspectFill" style='width:38%; height:240rpx;' src="{{albumCover}}"></image>
+      <view class="flow-list-right checkout_list ">
+        <text class="col-3 twolist-hidden">{{albumTitle}}</text>
+        <text class="col-3 f-38 twolist-hidden">{{address_detail}}</text>
+        <view class="dis-flex">
+        <text class="col-3 f-38 twolist-hidden">{{address_name}}  </text>
+        <text class="col-3 f-38 twolist-hidden">{{address_phone}}</text></view>
+      </view>
+    </view>
+  </view>
+</view>
