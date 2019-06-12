@@ -23,7 +23,7 @@
       </view>
     </view>
   </view>
-  <view class="order-navbar" style='margin-top:40rpx;'>
+  <view class="order-navbar" wx:if="{{initedSize}}" style='margin-top:40rpx;'>
     <view class="order-navbar-header dis-flex">
       <view class="dis-flex flex-y-center">
         <text class="f-40 col-6 widePinkButton" data-value="{{item.template}}" bindtap="uploadAndMakeAlbum">开始制作</text>

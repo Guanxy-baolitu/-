@@ -34,20 +34,20 @@ App({
         height:756,
         templatePages: [
           {
-            maxRatio: 1.1,
+            maxRatio: 1.1301,
             minRatio: 0.0,
             bgd: "../../images/templates/3_1.png",
-            cover: "../../images/templates/3_1.png",
-            mode: "aspectFill",
-            left: 160,
-            top: 86,
-            fwidth: 628,
-            fheight: 580
+            cover: "",
+            mode: "center",
+            left: 135,
+            top: 70,
+            fwidth: 680,
+            fheight: 625
           },
           {
             maxRatio: 1000,
             minRatio: 1.45,
-            bgd: "../../images/templates/3_2.png",
+            bgd: "",
             cover: "../../images/templates/3_2.png",
             mode: "aspectFill",
             left: 405,
@@ -56,9 +56,9 @@ App({
             fheight: 756
           },
           {
-            maxRatio: 1.45,
-            minRatio: 1.25,
-            bgd: "../../images/templates/3_3.png",
+            maxRatio: 1.4501,
+            minRatio: 1.13,
+            bgd: "",
             cover: "../../images/templates/3_3.png",
             mode: "aspectFill",
             left: 105,

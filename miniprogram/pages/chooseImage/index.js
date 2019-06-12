@@ -13,6 +13,7 @@ Page({
    */
   data: {
     initedImg: false,
+    initedSize : false,
     imageFilePaths: [],
     albumName: "",
     localImageSizes: {},
@@ -59,10 +60,17 @@ Page({
   //由系统bindLoad调用
   getImgSize: function(e) {
     var imgPath = e.currentTarget.dataset.value;
-    this.data.localImageSizes[imgPath] = {
+    var _that = this;
+    _that.data.localImageSizes[imgPath] = {
       width: e.detail.width,
       height: e.detail.height
     };
+    var supposeCompleted = true;
+    Object.keys(_that.data.localImageSizes).forEach(function(imagePath){
+      if (_that.data.localImageSizes.width == 0 || _that.data.localImageSizes.height==0)
+        supposeCompleted=false;
+    })
+    _that.data.initedSize = supposeCompleted
     $digest(this);
   },
 
@@ -85,7 +93,7 @@ Page({
     //   return;
     // }
     wx.showLoading({
-      title: '制作中，请稍候...',
+      title: '请稍候...',
     });
     let that = this;
     newAlbum = {
@@ -122,7 +130,7 @@ Page({
         }
       }
       // Step 1: 画底图
-      if (_page.cover !== "")
+      if (_page.bgd !== "")
         ctx.drawImage(_page.bgd, 0, 0, _template.width, _template.height);
       // Step 2: 把src(覆盖))的左上的left,top,源图像的矩形选择框的宽度，源图像的矩形选择框的高度,画在背景的位置
       var frameWidth = _page.fwidth;
@@ -141,18 +149,18 @@ Page({
       }
       else if (_page.mode == "center"){
         if (taller) {//照片竖长，压缩后左右留宽
-          var expectedFrameW = frameHeight/imgRatio;
-          ctx.drawImage(imgPath, 0, 0, width, height, _page.left + (frameWidth - expectedWidth) / 2, _page.top, expectedFrameW, _page.fheight);
+          var expectedFrameW = frameHeight / imgRatio;
+          ctx.drawImage(imgPath, 0, 0, width, height, (frameWidth - expectedFrameW) / 2 + _page.left, _page.top, expectedFrameW, _page.fheight);
         }
-        else{//照片不够长，上下留高
+        else{//照片横长，上下留高
           var expectedFrameH = frameWidth * imgRatio;
-          ctx.drawImage(imgPath, 0, 0, width, height, _page.left, _page.top + (frameHeight - expectedFrameH) / 2, _page.fwidth, expectedFrameH);
+          ctx.drawImage(imgPath, 0, 0, width, height, _page.left, (frameHeight - expectedFrameH) / 2 + _page.top, _page.fwidth, expectedFrameH);
         }
       }
       // Step 3: 画png装饰 
       if (_page.cover!=="")
         ctx.drawImage(_page.cover, 0, 0, _template.width, _template.height);
-      ctx.draw(true, function(e) {
+      ctx.draw(false, function(e) {
         wx.canvasToTempFilePath({
           x: 0,
           y: 0,
@@ -171,7 +179,7 @@ Page({
             }
             else{
               wx.showLoading({
-                title: '已完成' + (imgIdx + 1) + '/' + that.data.imageFilePaths.length+'页',
+                title: '制作' + (imgIdx + 1) + '/' + that.data.imageFilePaths.length,
               });
               that.drawPageOnCanvas(imgIdx+1);
             }
