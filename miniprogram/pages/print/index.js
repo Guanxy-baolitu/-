@@ -11,11 +11,13 @@ Page({
     albumPageNum: 0,
     albumTitle: "",
     albumCover:"",
-    order_total_price: 98.80,
-    order_pay_price:98.80,
-    express_price: 0.00,
+    currentMode : 0,
+    page_price: [1.80,4.20],
+    cover_price: [5.00, 12.00],
+    express_price: 5.00,
     categoryList:{},
-    address_show: 0
+    address_show: 0,
+    order_pay_price:0.00
   },
 
   /**
@@ -26,7 +28,6 @@ Page({
     $init(this);
     this.data.albumId = app.globalData.currentAlbumId;
     $digest(_this);
-    console.log(_this.data.albumId);
     app.globalData.myAlbums.forEach(function(album){
       if (album.albumId === _this.data.albumId){
         console.log(album);
@@ -37,6 +38,7 @@ Page({
       }
     })
     this.requestCategories();
+    this.calculate();
   },
   editAddress: function(){
     wx.navigateTo({
@@ -45,16 +47,34 @@ Page({
   },
 
   requestCategories: function (){
-    categories["封面"] = [];
-    categories["封面"].push({ value: "200g", selected: true });
-    categories["封面"].push({ value: "200g", selected: false });
-    categories["内页"] = [];
-    categories["内页"].push({ value: "128g", selected: true });
-    categories["内页"].push({ value: "157g", selected: false });
     categories["工艺"] = [];
-    categories["工艺"].push({ value: "常规不覆膜", selected: true });
-    categories["工艺"].push({ value: "封面覆哑膜", selected: false });
+    categories["工艺"].push({ value: "标准版", selected: true });
+    categories["工艺"].push({ value: "豪华版", selected: false });
     this.data.categoryList = categories;
+    $digest(this);
+  },
+
+  tapCat: function (event) {
+    var key = event.target.dataset.key;
+    var value = event.target.dataset.value;
+    var same = false;
+    categories[key].forEach(function (item) {
+      if (item.value === value && item.selected === true) same = true;
+      item.selected = false;
+    });
+    categories[key].forEach(function (item) {
+      if (item.value === value) { item.selected = true; }
+    });
+    if (same === true) return;
+    this.data.currentMode = value=="标准版"?0:1;
+    this.calculate();
+    $digest(this);
+  },
+
+  calculate: function(){
+    this.data.order_pay_price = this.data.albumPageNum * this.data.page_price[this.data.currentMode] + this.data.cover_price[this.data.currentMode];
+    if (this.data.address_show) this.data.order_pay_price += this.data.express_price;
+    this.data.order_pay_price = "" + this.data.express_price.toFixed(2);
     $digest(this);
   },
 
@@ -82,7 +102,7 @@ Page({
           duration: 2000
         })
         wx.redirectTo({
-          url: '../userOder/index',
+          url: '../userOrder/index',
         })
       }
     })

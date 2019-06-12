@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 用户信息 -->
   <view class="user">
-    <view class="user-header">
+    <view class="user-header"  style='background-color:#FFC801'>
       <view class="user-header-cont">
         <view class="user-header-avatar">
           <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
@@ -13,29 +13,29 @@
   <!-- 订单入口 -->
   <view class="order-navbar">
     <button bindtap="showMyOrder" class="btn-normal">
-        <view class="order-navbar-header dis-flex">
-          <text class="f-50">我的订单</text>
-          <view class="dis-flex flex-y-center">
-            <text class="f-40 col-6">全部订单</text>
-            <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
-          </view>
+      <view class="order-navbar-header dis-flex">
+        <text class="f-50">我的订单</text>
+        <view class="dis-flex flex-y-center">
+          <text class="f-40 col-6">全部订单</text>
+          <text class="iconfont icon-xiangyoujiantou user-orderJtou"></text>
         </view>
-      </button>
+      </view>
+    </button>
   </view>
   <!-- 我的影集 -->
-      <view class="title-header m-top4">我的影集</view>
-<view class="category-list">
-  <view class="list b-f" wx:for="{{albumsList}}" wx:key="*this">
-    <view class="left" data-value ="{{item.id}}"bindtap='onAlbumClick'>
-      <view class="img">
-        <image class="goodsImg" mode="aspectFill" src="{{item.img}}"></image>
+  <view class="title-header m-top4">我的影集</view>
+  <view class="category-list">
+    <view class="list b-f" wx:for="{{albumsList}}" wx:key="*this">
+      <view class="left" data-value="{{item.id}}" bindtap='onAlbumClick'>
+        <view class="img">
+          <image class="goodsImg" mode="aspectFill" src="{{item.img}}"></image>
+        </view>
       </view>
-    </view>
-    <view class="right">
-      <view class="cont">
-        <text class="f-30 title twolist-hidden m-top10">{{item.name}}</text>
+      <view class="right">
+        <view class="cont">
+          <text class="f-40 title twolist-hidden m-top10" style='font-weight:700;'>{{item.name}}</text>
+        </view>
       </view>
     </view>
   </view>
-</view>
 </view>

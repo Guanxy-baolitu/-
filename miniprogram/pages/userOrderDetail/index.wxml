@@ -1,0 +1,14 @@
+<view class='container'>
+  <view class='orderPanel'>
+    <view class="title-header m-top4" style='padding-left: 110rpx;'>已下单</view>
+    <image src='../../images/ordered.png' class='orderIcon'></image>
+<view class="orderDetail" style='margin-top:-40rpx;'>
+      <text class="f-40">您的订单预计2019-06-18开始处理，请您耐心等候</text>
+      <text class="f-40">2019-06-17 14:53</text>
+    </view>
+<view class="orderDetail m-top20">
+      <text class="f-40">您提交了订单，请等待系统确认</text>
+      <text class="f-40">2019-06-17 14:52</text>
+    </view>
+  </view>
+</view>

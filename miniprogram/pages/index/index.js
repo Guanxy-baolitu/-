@@ -1,6 +1,6 @@
 //index.js
 const app = getApp()
-var base64img = require("base64img.js")
+var base64img = require("../../utils/base64img.js")
 Page({
   data: {
     logged: false,
@@ -10,7 +10,9 @@ Page({
       {
         template: 1,
         title: "示例一",
-        images: [base64img.img1,base64img.img2]
+        images: [
+          'http://imgcache.fansyes.com/cnews/20181227/201812271111184009160.jpg',
+          'http://lady.people.com.cn/NMediaFile/2018/1116/MAIN201811160658000371115355865.jpg']
       },
       {
         template: 2,

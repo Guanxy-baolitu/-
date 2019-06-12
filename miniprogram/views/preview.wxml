@@ -3,7 +3,7 @@
     <image mode="widthFix" class="albumPage" src="{{item}}"></image>
   </view>
   <!-- 底线 -->
-  <view class="title-footer p-r" style='margin-bottom:45rpx;'>
+  <view class="title-footer p-r" style='margin-bottom:50rpx;'>
     <text class="f-34 col-9 cont">到底啦</text>
     <view class="hr"></view>
   </view>

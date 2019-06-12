@@ -45,7 +45,7 @@
   padding: 38rpx 0;
   line-height: 100rpx;
   font-weight: 700;
-  font-size: 48rpx;
+  font-size: 50rpx;
   width: 100%;
 }
 

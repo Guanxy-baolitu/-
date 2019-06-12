@@ -15,6 +15,7 @@ Page({
   onLoad: function () {
     var _this = this;
     PreviewJS.init(_this);
+    console.log();
   },
   onPrintClick : function(){
     wx.navigateTo({
@@ -24,7 +25,7 @@ Page({
   onShareAppMessage: function (res) {
     return {
       title: '我的第一本相册',
-      path: '/page/shareGuest/index?id=-1'
+      path: '/page/shareGuest/index'
     }
   },
 

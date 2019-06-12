@@ -1,42 +1,18 @@
-let app = getApp();
+// pages/userOrderDetail/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    templateList: []
-  },
-  onLoad: function (options) {
-    this.setData({
-      templateList: app.globalData.officialTemplates
-    })
-  },
-  chooseImage: function (e) {
-    app.globalData.currentTemplate = e.currentTarget.dataset.value;
-    console.log(app.globalData.currentTemplate);
-    wx.navigateTo({
-      url: '../chooseImage/index'
-    })
-  },
-  goTop: function (t) {
-    this.setData({
-      scrollTop: 0
-    });
-    wx.pageScrollTo({
-      scrollTop: 0,
-      duration: 300
-    })
+
   },
 
-  scroll: function (t) {
-    this.setData({
-      indexSearch: t.detail.scrollTop
-    }), t.detail.scrollTop > 300 ? this.setData({
-      floorstatus: !0
-    }) : this.setData({
-      floorstatus: !1
-    });
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
   },
 
   /**

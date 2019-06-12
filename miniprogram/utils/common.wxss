@@ -142,54 +142,9 @@
   -ms-flex-align: center;
   align-items: center;
 }
-.f-60 {font-size: 60rpx;}
-.f-58 {font-size: 58rpx;}
-.f-56 {font-size: 56rpx;}
-.f-54 {font-size: 54rpx;}
-.f-52 {font-size: 52rpx;}
 .f-50 {font-size: 50rpx;}
-.f-48 {font-size: 48rpx;}
-.f-46 {font-size: 46rpx;}
-.f-44 {font-size: 44rpx;}
-.f-42 {font-size: 42rpx;}
 .f-40 {font-size: 40rpx;}
-.f-38 {font-size: 38rpx;}
-.f-36 {font-size: 36rpx;}
 .f-34 {font-size: 34rpx;}
-.f-32 {font-size: 32rpx;}
-.f-31 {font-size: 31rpx;}
-.f-30 {font-size: 30rpx;}
-.f-29 {
-  font-size: 29rpx;
-}
-
-.f-28 {
-  font-size: 28rpx;
-}
-
-.f-26 {
-  font-size: 26rpx;
-}
-
-.f-25 {
-  font-size: 25rpx;
-}
-
-.f-24 {
-  font-size: 24rpx;
-}
-
-.f-22 {
-  font-size: 22rpx;
-}
-
-.f-w {
-  font-weight: 700;
-}
-
-.f-n {
-  font-weight: 400;
-}
 
 .col-f {
   color: #fff;

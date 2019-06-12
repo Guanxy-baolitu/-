@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    currentTemplate: 1,
+    currentTemplate: -1,
     currentAlbumId:-1,
     officialTemplates:[],
     myAlbums: [],
@@ -28,19 +28,46 @@ App({
     ]
     this.globalData.officialTemplates= [
       {
-        template: 1,
-        img: "../../images/tabBar/cart.png",
-        name: "模版一"
-      },
-      {
-        template: 2,
-        img: "../../images/tabBar/cate_on.png",
-        name: "模版二"
-      },
-      {
-        template: 3,
-        img: "../../images/tabBar/user.png",
-        name: "模版三"
+        template: 0,
+        cover: "../../images/templates/1_cover.png",
+        width: 945,
+        height:756,
+        templatePages: [
+          {
+            maxRatio: 1.1,
+            minRatio: 0.0,
+            bgd: "../../images/templates/3_1.png",
+            cover: "../../images/templates/3_1.png",
+            mode: "aspectFill",
+            left: 160,
+            top: 86,
+            fwidth: 628,
+            fheight: 580
+          },
+          {
+            maxRatio: 1000,
+            minRatio: 1.45,
+            bgd: "../../images/templates/3_2.png",
+            cover: "../../images/templates/3_2.png",
+            mode: "aspectFill",
+            left: 405,
+            top: 0,
+            fwidth: 485,
+            fheight: 756
+          },
+          {
+            maxRatio: 1.45,
+            minRatio: 1.25,
+            bgd: "../../images/templates/3_3.png",
+            cover: "../../images/templates/3_3.png",
+            mode: "aspectFill",
+            left: 105,
+            top: 105,
+            fwidth: 408,
+            fheight: 546
+          }
+        ],
+        name: "模板-白"
       }
     ]
     this.globalData.userAddress = [];

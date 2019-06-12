@@ -5,11 +5,11 @@
   flex-direction: column;
   box-sizing: border-box;
   align-items: center;
-  font-size: 60rpx;
+  font-size: 50rpx;
 } 
 .widePinkButton{
-  background-color: #EE1376;
-  color: #fff;
+  background-color: #FFC801;
+  color: #333333;
   border-radius: 60rpx;
   width: 90vw;
   text-align: center;
@@ -63,7 +63,7 @@ page {
   padding: 38rpx 0;
   line-height: 100rpx;
   font-weight: 700;
-  font-size: 48rpx;
+  font-size: 50rpx;
   width: 100%;
 }
 
@@ -326,7 +326,7 @@ page {
   height: 100rpx;
   line-height: 100rpx;
   font-weight: 700;
-  font-size: 48rpx;
+  font-size: 50rpx;
   /* margin-left: -10rpx; */
 }
 

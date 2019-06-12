@@ -14,7 +14,8 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
-    app.globalData.currentAlbumId = options.id;
+    // app.globalData.currentAlbumId = options.id;
+    app.globalData.currentAlbumId = -1;
     console.log(app.globalData.currentAlbumId);
     console.log(options);
     PreviewJS.init(_this);

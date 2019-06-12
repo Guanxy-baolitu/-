@@ -32,7 +32,7 @@
   width: 180rpx;
   height: 180rpx;
   border-radius: 50%;
-  border: 5rpx solid rgb(83, 83, 83);
+  border: 4rpx solid #fff;
   overflow: hidden;
 }
 .order-navbar {

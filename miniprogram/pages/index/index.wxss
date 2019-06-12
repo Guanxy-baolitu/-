@@ -27,7 +27,7 @@ page {
   padding: 38rpx 0;
   line-height: 100rpx;
   font-weight: 700;
-  font-size: 48rpx;
+  font-size: 50rpx;
   width: 100%;
 }
 
@@ -39,8 +39,8 @@ page {
 }
 
 .pinkButton{
-  background-color: #EE1376;
-  color: #fff;
+  background-color: #FFC801;
+  color: #333333;
   border-radius: 60rpx;
   padding-left: 80rpx;
   padding-right: 80rpx;

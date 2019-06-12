@@ -1,0 +1,21 @@
+
+.orderPanel{
+  width: 100%;
+  background-color: #fff;
+  padding: 40rpx;
+}
+
+.orderIcon{
+  width: 55rpx;
+  height: 55rpx;
+  position: relative;
+  top:-72rpx;
+  left: 35rpx;
+}
+
+.orderDetail{
+  display: flex;
+  flex-direction: column;
+  padding-left: 110rpx;
+  padding-right: 70rpx;
+}
