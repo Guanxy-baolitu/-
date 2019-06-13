@@ -4,6 +4,7 @@
     "pages/album/index",
     "pages/chooseImage/index",
     "pages/albumDetail/index",
+    "pages/albumUpload/index",
     "pages/print/index",
     "pages/printAddress/index",
     "pages/user/index",
