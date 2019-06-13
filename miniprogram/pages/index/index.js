@@ -35,7 +35,6 @@ Page({
     app.globalData.currentTemplate = e.target.dataset.value;
     wx.navigateTo({
       url: '../chooseImage/index'
-      // url: '../shareGuest/index?id='+app.globalData.currentAlbumId
     })
   },
 })

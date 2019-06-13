@@ -1,2 +1,14 @@
-<!--pages/albumUpload/index.wxml-->
-<text>pages/albumUpload/index.wxml</text>
+<!--index.wxml-->
+<view class="container">
+    <include src="../../views/preview.wxml" />
+  <view class="order-navbar" style='position: absolute; bottom: 18rpx; z-index:1000;'>
+    <view class="order-navbar-header dis-flex">
+      <view class="dis-flex flex-y-center">
+        <text class="f-40 col-6 pinkButton" bindtap="onPrintClick">打印</text>
+      </view>
+      <view class="dis-flex flex-y-center">
+        <button class="f-40 col-6 pinkButton" data-value="{{item.template}}" open-type="share">分享</button>
+      </view>
+    </view>
+  </view>
+</view>

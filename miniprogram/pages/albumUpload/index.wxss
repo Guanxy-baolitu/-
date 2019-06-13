@@ -1,1 +1,13 @@
-/* pages/albumUpload/index.wxss */
+.albumPage{
+  width: 100%;
+  align-items: center
+}
+.pinkButton{
+  background-color: #FFC801;
+  color: #333333;
+  border-radius: 60rpx;
+  padding-left: 80rpx;
+  padding-right: 80rpx;
+  padding-top: 0rpx;
+  padding-bottom: 0rpx;
+}

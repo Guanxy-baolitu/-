@@ -1,7 +1,7 @@
 App({
   globalData: {
     currentTemplate: -1,
-    currentAlbumId:-1,
+    tmpAlbum :null,
     swiperTemplates:[],
     officialTemplates:[],
     myAlbums: [],
@@ -148,7 +148,7 @@ App({
     ]
     this.globalData.swiperTemplates = [
       {
-        template: 1,
+        template: 0,
         title: "时光",
         height: 650,
         images: ["https://s2.ax1x.com/2019/06/12/VW0vuV.png",
@@ -158,7 +158,7 @@ App({
           ]
       },
       {
-        template: 1,
+        template: 0,
         title: "金婚",
         images: [
           "https://s2.ax1x.com/2019/06/12/VWBpEF.png",
@@ -168,7 +168,7 @@ App({
           ]
       },
       {
-        template: 3,
+        template: 2,
         title: "在路上",
         images: [
           "https://s2.ax1x.com/2019/06/13/VWySMR.jpg",
@@ -176,7 +176,7 @@ App({
           "https://s2.ax1x.com/2019/06/13/VWyAiD.jpg",]
       },
       {
-        template: 2,
+        template: 1,
         title: "远行的足迹",
         images: [
           "https://s2.ax1x.com/2019/06/13/VWyps1.jpg",

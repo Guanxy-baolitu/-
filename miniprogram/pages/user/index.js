@@ -39,8 +39,6 @@ Page({
       }
     })
     const db = wx.cloud.database()
-    // 查询当前用户所有的 counters
-    console.log(app.globalData.openid);
     db.collection('albums').where({
       _openid: app.globalData.openid
     }).get({
@@ -50,7 +48,7 @@ Page({
           albumCovers.push({
             id: record._id,
             img: record.albumPages[0],
-            name: record.albumName,
+            name: record.albumTitle,
           })
         })
         this.setData({
@@ -69,7 +67,6 @@ Page({
   },
 
   onAlbumClick: function(e) {
-    app.globalData.currentAlbumId = e.currentTarget.dataset.value;
     wx.navigateTo({
       url: '../albumDetail/index?album_cloudid=' + e.currentTarget.dataset.value + '&openid=' + app.globalData.openid,
     })

@@ -29,12 +29,12 @@ Page({
   },
   onPrintClick: function () {
     wx.navigateTo({
-      url: '../print/index?album_cloudid=' + this.data.albumId + '&albumPageNum=' + this.data.albumPages.length + '&albumTitle=' + this.data.albumName + '&albumCover=' + this.data.albumPages[1]
+      url: '../print/index?album_cloudid=' + this.data.albumId + '&albumPageNum=' + this.data.albumPages.length + '&albumTitle=' + this.data.albumTitle + '&albumCover=' + this.data.albumPages[1]
     })
   },
   onShareAppMessage: function (res) {
     return {
-      title: this.data.albumName,
+      title: this.data.albumTitle,
       path: '/page/shareGuest/index?album_cloudid=' + this.data.albumId + '&openid=' + app.globalData.openid,
       imageUrl: this.data.albumPages[0]
     }

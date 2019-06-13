@@ -6,7 +6,6 @@ import {
 let app = getApp();
 var newAlbum;
 var currentPageIdx = 0;
-var cloudPages = [];
 Page({
 
   /**
@@ -16,7 +15,7 @@ Page({
     initedImg: false,
     initedSize: false,
     imageFilePaths: [],
-    albumName: "",
+    albumTitle: "",
     localImageSizes: {},
     canvasWidth: 0,
     canvasHeight: 0
@@ -31,7 +30,7 @@ Page({
   },
   getAlbumName: function(e) {
     var val = e.detail.value;
-    this.data.albumName = val;
+    this.data.albumTitle = val;
     $digest(this);
   },
 
@@ -88,7 +87,7 @@ Page({
   },
 
   uploadAndMakeAlbum: function() {
-    if (this.data.albumName === "") {
+    if (this.data.albumTitle === "") {
       wx.showToast({
         icon: 'none',
         title: '请输入相册名称',
@@ -101,10 +100,11 @@ Page({
     let that = this;
     newAlbum = {
       albumId: app.globalData.myAlbums.length,
-      albumTitle: that.data.albumName,
-      albumPages: [app.globalData.officialTemplates[0].cover]
+      albumTitle: that.data.albumTitle,
+      albumPages: [],
+      imageFilePaths: that.data.imageFilePaths
+      
     }
-    cloudPages.length=0;
     that.drawPageOnCanvas(0)
       .then((newPagePath) => {
 
@@ -170,17 +170,20 @@ Page({
             wx.hideLoading();
             let newPagePath = res.tempFilePath;
             newAlbum.albumPages.push(newPagePath);
-            if (newAlbum.albumPages.length != that.data.imageFilePaths.length + 1) {
+            if (newAlbum.albumPages.length != that.data.imageFilePaths.length) {
               wx.showLoading({
                 title: '完成' + (imgIdx + 1) + '/' + that.data.imageFilePaths.length,
               });
               that.drawPageOnCanvas(imgIdx + 1);
             }else 
             { //全部页制作完成
-              wx.showLoading({
-                title: '导出中...',
-              });
-              that.uploadNewAlbum(1);//不上传封面，而是用template
+              wx.showToast({
+                title: '制作完成！',
+              })
+              app.globalData.tmpAlbum=newAlbum;
+              wx.redirectTo({
+                url: '../albumUpload/index'
+              })
             }
           },
           fail: function(res) {
@@ -194,70 +197,6 @@ Page({
           }
         })
       });
-    })
-  },
-
-  uploadNewAlbum: function(imgIdx) {
-    return new Promise((resolve, reject) => {
-      let that = this;
-      var filePath = newAlbum.albumPages[imgIdx];
-      console.log(filePath);
-      var leftIdx = filePath.lastIndexOf("/");
-      var rightIdx = filePath.lastIndexOf(".");
-      var pureFileName = filePath.substring(leftIdx + 1, rightIdx);
-      // 上传图片
-      const cloudPath = pureFileName + filePath.match(/\.[^.]+?$/)[0]
-      wx.cloud.uploadFile({
-        cloudPath,
-        filePath,
-        success: res => {
-          cloudPages.push(res.fileID);
-          wx.hideLoading();
-          if (imgIdx != newAlbum.albumPages.length - 1) { //继续上传
-            wx.showLoading({
-              title: '导出' + imgIdx + '/' + that.data.imageFilePaths.length,
-            });
-            that.uploadNewAlbum(imgIdx + 1);
-          } else { //全部完成
-            console.log(cloudPages);
-            const db = wx.cloud.database()
-            db.collection('albums').add({
-              data: {
-                albumName: that.data.albumName,
-                template: app.globalData.currentTemplate,
-                albumPages: cloudPages
-              },
-              success: res => {
-                console.log(res);
-                wx.showToast({
-                  title: '制作成功!',
-                  })
-                wx.redirectTo({
-                  url: '../albumDetail/index?album_cloudid=' + res._id+'&openid='+app.globalData.openid,
-                })
-              },
-              fail: err => {
-                wx.showToast({
-                  icon: 'none',
-                  title: '新增记录失败'
-                })
-                newAlbum.albumPages.length = 0;
-                console.error('[数据库] [新增记录] 失败：', err)
-              }
-            })
-
-          }
-        },
-        fail: e => {
-          console.error('[上传文件] 失败：', e)
-          wx.showToast({
-            icon: 'none',
-            title: '出错了，请重试',
-          })
-        },
-        complete: () => {
-        }
-      })
     })
   },
 
