@@ -9,7 +9,7 @@ Page({
     address:{
       address_show: 0,
       address_name:"",
-      address_phone:-1,
+      address_phone:"",
       address_region: "",
       address_detail:""
     }
@@ -22,7 +22,7 @@ Page({
     $init(this);
     this.data.address.address_show = app.globalData.userAddress[0].address_id;
     this.data.address.address_name=app.globalData.userAddress[0].address_name;
-    this.data.address.address_phone=app.globalData.userAddress[0].address_phone;
+    this.data.address.address_phone = app.globalData.userAddress[0].address_phone.toString();
     this.data.address.address_region=app.globalData.userAddress[0].address_region;
     this.data.address.address_detail=app.globalData.userAddress[0].address_detail;
     $digest(this);
@@ -31,7 +31,7 @@ Page({
   confirmAddress: function(){
     console.log(this.data);
     if (this.data.address.address_name===""
-      || this.data.address.address_phone <100
+      || this.data.address.address_phone.length < 7
       || this.data.address.address_region === ""
       || this.data.address.address_detail === ""){
       wx.showToast({
@@ -43,7 +43,7 @@ Page({
     else {
       app.globalData.userAddress[0].address_id = 1;
       app.globalData.userAddress[0].address_name = this.data.address.address_name;
-      app.globalData.userAddress[0].address_phone = this.data.address.address_phone;
+      app.globalData.userAddress[0].address_phone = Number(this.data.address.address_phone);
       app.globalData.userAddress[0].address_region = this.data.address.address_region;
       app.globalData.userAddress[0].address_detail = this.data.address.address_detail;
       wx.navigateBack({
@@ -63,7 +63,7 @@ Page({
   },
   getRegion: function (e) {
     var val = e.detail.value;
-    this.data.address.address_region = val;
+    this.data.address.address_region = val.toString();
     $digest(this);
   },
   getDetail: function (e) {

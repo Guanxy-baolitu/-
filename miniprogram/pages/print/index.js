@@ -23,20 +23,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     var _this = this;
     $init(this);
-    this.data.albumId = app.globalData.currentAlbumId;
+    this.data.albumId = options.album_cloudid;
+    _this.data.albumPageNum = options.albumPageNum;
+    _this.data.albumTitle = options.albumTitle;
+    _this.data.albumCover = options.albumCover;
     $digest(_this);
-    app.globalData.myAlbums.forEach(function(album){
-      if (album.albumId === _this.data.albumId){
-        console.log(album);
-        _this.data.albumPageNum = album.albumPages.length;
-        _this.data.albumTitle = album.albumTitle;
-        _this.data.albumCover = album.albumPages[0];
-        $digest(_this);
-      }
-    })
     this.requestCategories();
     this.calculate();
   },
@@ -72,9 +66,9 @@ Page({
   },
 
   calculate: function(){
-    this.data.order_pay_price = this.data.albumPageNum * this.data.page_price[this.data.currentMode] + this.data.cover_price[this.data.currentMode];
+    this.data.order_pay_price = (this.data.albumPageNum-1) * this.data.page_price[this.data.currentMode] + this.data.cover_price[this.data.currentMode];
     if (this.data.address_show) this.data.order_pay_price += this.data.express_price;
-    this.data.order_pay_price = "" + this.data.express_price.toFixed(2);
+    this.data.order_pay_price = "" + this.data.order_pay_price.toFixed(2);
     $digest(this);
   },
 
@@ -92,7 +86,7 @@ Page({
           duration: 2000
         })
         wx.redirectTo({
-          url: '../userOder/index',
+          url: '../userOrderDetail/index',
         })
       },
       fail(res) { 
@@ -102,7 +96,7 @@ Page({
           duration: 2000
         })
         wx.redirectTo({
-          url: '../userOrder/index',
+          url: '../userOrderDetail/index',
         })
       }
     })

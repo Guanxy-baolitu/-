@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 商品列表 -->
   <view class="m-top20 order-item  b-f">
-    <navigator class="dis-flex flow-shopList" url="../userOrderDetail/index">
+    <navigator hover-class="none" class="dis-flex flow-shopList" url="../userOrderDetail/index">
         <image mode="aspectFill" style='width:38%; height:240rpx;' src="{{albumCover}}"></image>
       <view class="flow-list-right checkout_list" style='margin-left:25rpx'>
         <view class="dis-flex"><text class="col-3 twolist-hidden">{{albumTitle}}</text> 

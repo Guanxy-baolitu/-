@@ -5,7 +5,8 @@ import {
 } from '../../utils/common.util'
 let app = getApp();
 var newAlbum;
-var currentPageIdx=0;
+var currentPageIdx = 0;
+var cloudPages = [];
 Page({
 
   /**
@@ -13,18 +14,18 @@ Page({
    */
   data: {
     initedImg: false,
-    initedSize : false,
+    initedSize: false,
     imageFilePaths: [],
     albumName: "",
     localImageSizes: {},
-    canvasWidth:0,
-    canvasHeight:0
+    canvasWidth: 0,
+    canvasHeight: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.addImage();
     $init(this);
   },
@@ -43,10 +44,12 @@ Page({
       success: function(res) {
         _this.data.imageFilePaths = _this.data.imageFilePaths.concat(res.tempFilePaths);
         _this.data.initedImg = true;
+        _this.data.initedSize = false;
         $digest(_this);
       },
       fail: e => {
-        console.error(e)
+        _this.data.initedImg = true;
+        $digest(_this);
       }
     })
   },
@@ -66,12 +69,12 @@ Page({
       height: e.detail.height
     };
     var supposeCompleted = true;
-    Object.keys(_that.data.localImageSizes).forEach(function(imagePath){
-      if (_that.data.localImageSizes.width == 0 || _that.data.localImageSizes.height==0)
-        supposeCompleted=false;
+    Object.keys(_that.data.localImageSizes).forEach(function(imagePath) {
+      if (_that.data.localImageSizes.width == 0 || _that.data.localImageSizes.height == 0)
+        supposeCompleted = false;
     })
     _that.data.initedSize = supposeCompleted
-    $digest(this);
+    $digest(_that);
   },
 
   handleImagePreview(e) {
@@ -85,13 +88,13 @@ Page({
   },
 
   uploadAndMakeAlbum: function() {
-    // if (albumName === "") {
-    //   wx.showToast({
-    //     icon: 'none',
-    //     title: '请输入相册名称',
-    //   })
-    //   return;
-    // }
+    if (this.data.albumName === "") {
+      wx.showToast({
+        icon: 'none',
+        title: '请输入相册名称',
+      })
+      return;
+    }
     wx.showLoading({
       title: '请稍候...',
     });
@@ -101,9 +104,10 @@ Page({
       albumTitle: that.data.albumName,
       albumPages: [app.globalData.officialTemplates[0].cover]
     }
+    cloudPages.length=0;
     that.drawPageOnCanvas(0)
       .then((newPagePath) => {
-        
+
       })
   },
 
@@ -113,8 +117,8 @@ Page({
       var imgPath = that.data.imageFilePaths[imgIdx];
       var ctx = wx.createCanvasContext(imgPath); //绘图上下文
       var _template = app.globalData.officialTemplates[app.globalData.currentTemplate];
-      this.data.canvasWidth = _template.width;
-      this.data.canvasHeight = _template.height
+      that.data.canvasWidth = _template.width;
+      that.data.canvasHeight = _template.height
       $digest(that);
       // Step 0: 定位模板页
       var width = that.data.localImageSizes[imgPath].width;
@@ -138,58 +142,54 @@ Page({
       var frameRatio = frameHeight / frameWidth;
       var taller = imgRatio > frameRatio ? true : false;
       if (_page.mode == "aspectFill") {
-        if (taller){//照片竖长，上下边剪掉
+        if (taller) { //照片竖长，上下边剪掉
           var expectedHeight = width * frameRatio;
           ctx.drawImage(imgPath, 0, (height - expectedHeight) / 2, width, expectedHeight, _page.left, _page.top, _page.fwidth, _page.fheight);
-        }
-        else {//照片横宽，左右边剪掉
+        } else { //照片横宽，左右边剪掉
           var expectedWidth = height / frameRatio;
           ctx.drawImage(imgPath, (width - expectedWidth) / 2, 0, expectedWidth, height, _page.left, _page.top, _page.fwidth, _page.fheight);
         }
-      }
-      else if (_page.mode == "center"){
-        if (taller) {//照片竖长，压缩后左右留宽
+      } else if (_page.mode == "center") {
+        if (taller) { //照片竖长，压缩后左右留宽
           var expectedFrameW = frameHeight / imgRatio;
           ctx.drawImage(imgPath, 0, 0, width, height, (frameWidth - expectedFrameW) / 2 + _page.left, _page.top, expectedFrameW, _page.fheight);
-        }
-        else{//照片横长，上下留高
+        } else { //照片横长，上下留高
           var expectedFrameH = frameWidth * imgRatio;
           ctx.drawImage(imgPath, 0, 0, width, height, _page.left, (frameHeight - expectedFrameH) / 2 + _page.top, _page.fwidth, expectedFrameH);
         }
       }
       // Step 3: 画png装饰 
-      if (_page.cover!=="")
+      if (_page.cover !== "")
         ctx.drawImage(_page.cover, 0, 0, _template.width, _template.height);
       ctx.draw(false, function(e) {
         wx.canvasToTempFilePath({
           x: 0,
           y: 0,
           canvasId: imgPath,
-          success: function (res) {
+          success: function(res) {
             wx.hideLoading();
             let newPagePath = res.tempFilePath;
             newAlbum.albumPages.push(newPagePath);
-            console.log(newAlbum.albumPages);
-            if (newAlbum.albumPages.length == that.data.imageFilePaths.length + 1) {
-              app.globalData.currentAlbumId = newAlbum.albumId;
-              app.globalData.myAlbums.push(newAlbum);
-              wx.redirectTo({
-                url: '../albumDetail/index',
-              })
-            }
-            else{
+            if (newAlbum.albumPages.length != that.data.imageFilePaths.length + 1) {
               wx.showLoading({
-                title: '制作' + (imgIdx + 1) + '/' + that.data.imageFilePaths.length,
+                title: '完成' + (imgIdx + 1) + '/' + that.data.imageFilePaths.length,
               });
-              that.drawPageOnCanvas(imgIdx+1);
+              that.drawPageOnCanvas(imgIdx + 1);
+            }else 
+            { //全部页制作完成
+              wx.showLoading({
+                title: '导出中...',
+              });
+              that.uploadNewAlbum(1);//不上传封面，而是用template
             }
           },
           fail: function(res) {
             wx.hideLoading();
             wx.showToast({
               icon: 'none',
-              title: '失败，未知错误',
+              title: '出错了，请重试',
             })
+            newAlbum.albumPages.length=0;
             console.log(res);
           }
         })
@@ -197,11 +197,74 @@ Page({
     })
   },
 
+  uploadNewAlbum: function(imgIdx) {
+    return new Promise((resolve, reject) => {
+      let that = this;
+      var filePath = newAlbum.albumPages[imgIdx];
+      console.log(filePath);
+      var leftIdx = filePath.lastIndexOf("/");
+      var rightIdx = filePath.lastIndexOf(".");
+      var pureFileName = filePath.substring(leftIdx + 1, rightIdx);
+      // 上传图片
+      const cloudPath = pureFileName + filePath.match(/\.[^.]+?$/)[0]
+      wx.cloud.uploadFile({
+        cloudPath,
+        filePath,
+        success: res => {
+          cloudPages.push(res.fileID);
+          wx.hideLoading();
+          if (imgIdx != newAlbum.albumPages.length - 1) { //继续上传
+            wx.showLoading({
+              title: '导出' + imgIdx + '/' + that.data.imageFilePaths.length,
+            });
+            that.uploadNewAlbum(imgIdx + 1);
+          } else { //全部完成
+            console.log(cloudPages);
+            const db = wx.cloud.database()
+            db.collection('albums').add({
+              data: {
+                albumName: that.data.albumName,
+                template: app.globalData.currentTemplate,
+                albumPages: cloudPages
+              },
+              success: res => {
+                console.log(res);
+                wx.showToast({
+                  title: '制作成功!',
+                  })
+                wx.redirectTo({
+                  url: '../albumDetail/index?album_cloudid=' + res._id+'&openid='+app.globalData.openid,
+                })
+              },
+              fail: err => {
+                wx.showToast({
+                  icon: 'none',
+                  title: '新增记录失败'
+                })
+                newAlbum.albumPages.length = 0;
+                console.error('[数据库] [新增记录] 失败：', err)
+              }
+            })
+
+          }
+        },
+        fail: e => {
+          console.error('[上传文件] 失败：', e)
+          wx.showToast({
+            icon: 'none',
+            title: '出错了，请重试',
+          })
+        },
+        complete: () => {
+        }
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示

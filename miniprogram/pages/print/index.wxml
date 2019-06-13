@@ -36,9 +36,9 @@
     <text class="f-40 m-top20" style="width:66.67%; float: right;">每页{{page_price[currentMode]}}元×{{albumPageNum}}+封面{{cover_price[currentMode]}}元</text>
   </view>
   <view class="flow-all-money b-f" style='width:100%; height: 100rpx; padding-left: 100rpx; '>
-    <text class="flex-three m-top20 f-40"style='font-weight:700'>配送费用</text>
+    <text class="flex-three m-top20 f-40" style='font-weight:700'>配送费用</text>
     <view class="f-40 m-top20" style="width:66.67%; float: right;">
-      <text wx:if="{{address.address_id}}"style='font-weight:700'>{{express_price}}元</text>
+      <text wx:if="{{address_show}}"style='font-weight:700'>{{express_price}}元</text>
       <text wx:else >请先选择配送地址</text>
     </view>
   </view>

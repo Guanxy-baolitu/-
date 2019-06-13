@@ -4,7 +4,6 @@
     "pages/album/index",
     "pages/chooseImage/index",
     "pages/albumDetail/index",
-    "pages/shareGuest/index",
     "pages/print/index",
     "pages/printAddress/index",
     "pages/user/index",
@@ -13,7 +12,7 @@
   ],
   "tabBar": {
     "color": "#333333",
-    "selectedColor": "#FFC801",
+    "selectedColor": "#FF9900",
     "borderStyle": "black",
     "backgroundColor": "#FFFFFF",
     "list": [

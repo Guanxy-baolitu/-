@@ -5,10 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    albumCover:"http://imgcache.fansyes.com/cnews/20181227/201812271111184009160.jpg",
-    albumTitle: "影集001",
+    albumCover:"../../images/templates/1_cover.png",
+    albumTitle: "我的影集",
     address_detail: "金苑路24号",
-    address_name: "赵大爷",
+    address_name: "赵老爷",
     address_phone: "178****6785"
   },
 

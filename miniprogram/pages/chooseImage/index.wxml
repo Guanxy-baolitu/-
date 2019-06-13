@@ -1,6 +1,6 @@
 <view class="container" wx:if="{{initedImg}}">
-  <view class="order-navbar-header dis-flex inputBlock">
-    <text class="f-50" style='width:35%; font-weight:700;'>相册名称</text>
+  <view class="order-navbar-header dis-flex inputBlock m-top40">
+    <text class="f-50" style='width:35%; font-weight:700;'>相册名称：</text>
     <view class="dis-flex flex-y-center" style='width:65%;'>
       <input class="f-50" name="name" placeholder="请输入相册名称" value="" bindinput="getAlbumName"></input>
     </view>

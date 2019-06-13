@@ -1,19 +1,19 @@
 <!--index.wxml-->
 <view class="container">
-  <scroll-view scroll-y bindscroll="scroll" scroll-into-view="{{toView}}">
+  <scroll-view scroll-y>
     <view wx:for="{{swiperList}}" wx:key="unique">
-      <view class="page-section page-section-spacing swiper">
-        <swiper current="{{current}}" indicator-dots="{{false}}" previous-margin="20rpx" next-margin="20rpx" style="height: 1000rpx;">
+      <view class="page-section page-section-spacing" style='margin:auto'>
+        <swiper current="{{current}}" indicator-dots="{{false}}"  previous-margin="40rpx" next-margin="40rpx" circular="true" class='' style='width:100%; height:48vh;'>
           <block wx:for="{{item.images}}" wx:key="*this">
-            <swiper-item class="img">
-              <image mode="aspectFill" class='swiper-item' src="{{item}}" />
+            <swiper-item>
+              <image mode="aspectFit" style='height:55vh;' src="{{item}}" />
             </swiper-item>
           </block>
         </swiper>
       </view>
       <view class="order-navbar">
         <view class="order-navbar-header dis-flex">
-          <text class="f-50">{{item.title}}</text>
+          <text class="f-50 no-overflow-text">{{item.title}}</text>
           <view class="dis-flex flex-y-center">
             <text class="f-40 col-6 pinkButton" data-value="{{item.template}}" bindtap="useTemplate">使用此模板</text>
           </view>

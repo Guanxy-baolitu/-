@@ -56,3 +56,13 @@
   justify-content: space-between;
   align-items: center;
 }
+.wxSearchKeyItem{
+  text-align: center;
+  font-size: 34rpx;
+  padding-left: 6rpx;
+  padding-right: 6rpx;
+  padding-top: 3rpx;
+  padding-bottom:3rpx;
+  border-radius: 24rpx;
+  border: 2rpx solid #eee;
+}

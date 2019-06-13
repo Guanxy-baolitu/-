@@ -1,32 +1,48 @@
 var PreviewJS = require("../../views/preview.js")
 let app = getApp();
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-    albumId:-1
+    albumId:-1,
+    isGuest : false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     var _this = this;
-    PreviewJS.init(_this);
-    console.log();
+    PreviewJS.init(_this, options.album_cloudid);
+    wx.cloud.callFunction({
+      name: 'login',
+      data: {},
+      success: res => {
+        app.globalData.openid = res.result.openid;
+        if (res.result.openid != options.openid)
+          _this.setData({
+            isGuest:true
+          })
+      },
+      fail: err => {
+        console.error("openid获取失败")
+      }
+    })
   },
-  onPrintClick : function(){
+  onPrintClick: function () {
     wx.navigateTo({
-      url: '../print/index',
+      url: '../print/index?album_cloudid=' + this.data.albumId + '&albumPageNum=' + this.data.albumPages.length + '&albumTitle=' + this.data.albumName + '&albumCover=' + this.data.albumPages[1]
     })
   },
   onShareAppMessage: function (res) {
     return {
-      title: '我的第一本相册',
-      path: '/page/shareGuest/index'
+      title: this.data.albumName,
+      path: '/page/shareGuest/index?album_cloudid=' + this.data.albumId + '&openid=' + app.globalData.openid,
+      imageUrl: this.data.albumPages[0]
     }
+  },
+  makeAlso : function(){
+    wx.redirectTo({
+      url: '/pages/album/index',
+    })
   },
 
   /**
@@ -70,11 +86,4 @@ Page({
   onReachBottom: function () {
 
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

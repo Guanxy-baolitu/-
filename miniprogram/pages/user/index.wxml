@@ -1,7 +1,7 @@
 <view class="container">
   <!-- 用户信息 -->
   <view class="user">
-    <view class="user-header"  style='background-color:#FFC801'>
+    <view class="user-header" style='background-color:#FFC801'>
       <view class="user-header-cont">
         <view class="user-header-avatar">
           <open-data class="" lang="zh_CN" type="userAvatarUrl"></open-data>
@@ -24,6 +24,9 @@
   </view>
   <!-- 我的影集 -->
   <view class="title-header m-top4">我的影集</view>
+  <view wx:if="{{!albumsList.length}}" style='top: 0;margin-left:240rpx;margin-right:240rpx;'>
+    <image mode="aspectFit" style="width:360rpx;" src="../../images/no_content.png"></image>
+  </view>
   <view class="category-list">
     <view class="list b-f" wx:for="{{albumsList}}" wx:key="*this">
       <view class="left" data-value="{{item.id}}" bindtap='onAlbumClick'>
@@ -32,8 +35,10 @@
         </view>
       </view>
       <view class="right">
-        <view class="cont">
-          <text class="f-40 title twolist-hidden m-top10" style='font-weight:700;'>{{item.name}}</text>
+        <view class="cont dis-flex flex-y-center" style='padding:2rpx;'>
+          <text class="f-40 no-overflow-text title twolist-hidden m-top10" style='width:77%;font-weight:700;'>{{item.name}}</text>
+          <text bindtap="deleteAlbum" data-value="{{item.id}}" class=" wxSearchKeyItem f-40" style='width:23%;'>删除</text>
+
         </view>
       </view>
     </view>

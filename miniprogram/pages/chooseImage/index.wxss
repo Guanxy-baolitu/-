@@ -50,7 +50,6 @@
 }
 
 .order-navbar-header {
-  margin: auto;
   height: 70rpx;
   justify-content: space-between;
   align-items: center;

@@ -6,10 +6,6 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
-
-.swiper-item{
-  height: 1000rpx;
-}
 .page-section_center{
   display: flex;
   flex-direction: column;

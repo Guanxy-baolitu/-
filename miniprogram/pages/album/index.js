@@ -14,7 +14,6 @@ Page({
   },
   chooseImage: function (e) {
     app.globalData.currentTemplate = e.currentTarget.dataset.value;
-    console.log(app.globalData.currentTemplate);
     wx.navigateTo({
       url: '../chooseImage/index'
     })
