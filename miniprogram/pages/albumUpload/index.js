@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    albumId:-1
+    albumId:0
   },
 
   /**
@@ -24,11 +24,13 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-    return {
-      title: this.data.albumTitle,
-      path: '/page/shareGuest/index?album_cloudid=' + this.data.albumId + '&openid=' + app.globalData.openid,
-      imageUrl: this.data.albumPages[0]
+    var _that = this;
+    var shareObj = {
+      title: _that.data.albumTitle,
+      path: '/pages/albumDetail/index?album_cloudid=' + _that.data.albumId + '&openid=' + app.globalData.openid,
+      imageUrl: _that.data.albumPages[0]
     }
+    return shareObj;
   },
 
   uploadNewAlbum: function (imgIdx) {
@@ -36,15 +38,13 @@ Page({
       if (imgIdx == 1) {
         wx.showToast({
           icon: "none",
-          title: '正在进行相册备份，退出将无法保存...',
+          title: '正在保存，请不要退出...',
           duration: 150000000
         })
         cloudPages.length = 0;
       }
       let that = this;
       var filePath = app.globalData.tmpAlbum.albumPages[imgIdx-1];
-      console.log(imgIdx);
-      console.log(app.globalData.tmpAlbum);
       var leftIdx = filePath.lastIndexOf("/");
       var rightIdx = filePath.lastIndexOf(".");
       var pureFileName = filePath.substring(leftIdx + 1, rightIdx);
@@ -59,7 +59,7 @@ Page({
           if (imgIdx < app.globalData.tmpAlbum.albumPages.length) { //继续上传
             wx.showToast({
               icon: "none",
-              title: '已备份' + imgIdx + '/' + app.globalData.tmpAlbum.imageFilePaths.length,
+              title: '已保存' + imgIdx + '/' + app.globalData.tmpAlbum.imageFilePaths.length,
               duration: 150000000
             })
             that.uploadNewAlbum(imgIdx + 1);
@@ -81,6 +81,7 @@ Page({
   },
 
   writeIntoDatabase: function(){
+    var _that = this;
     console.log(cloudPages);
     const db = wx.cloud.database()
     db.collection('albums').add({
@@ -90,10 +91,12 @@ Page({
         albumPages: cloudPages
       },
       success: res => {
-        console.log(res);
+        _that.setData({
+          albumId: res._id,
+        })
         wx.showToast({
           icon: 'none',
-          title: '备份完成！',
+          title: '保存完成！',
         })
       },
       fail: err => {

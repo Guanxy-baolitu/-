@@ -2,7 +2,7 @@ var PreviewJS = require("../../views/preview.js")
 let app = getApp();
 Page({
   data: {
-    albumId:-1,
+    albumId:0,
     isGuest : false
   },
 
@@ -11,6 +11,9 @@ Page({
    */
   onLoad: function (options) {
     var _this = this;
+    _this.setData({
+      albumId:options.album_cloudid
+    })
     PreviewJS.init(_this, options.album_cloudid);
     wx.cloud.callFunction({
       name: 'login',
@@ -33,11 +36,13 @@ Page({
     })
   },
   onShareAppMessage: function (res) {
-    return {
-      title: this.data.albumTitle,
-      path: '/page/shareGuest/index?album_cloudid=' + this.data.albumId + '&openid=' + app.globalData.openid,
-      imageUrl: this.data.albumPages[0]
+    var _that = this;
+    var shareObj = {
+      title: _that.data.albumTitle,
+      path: '/pages/albumDetail/index?album_cloudid=' + _that.data.albumId + '&openid=' + app.globalData.openid,
+      imageUrl: _that.data.albumPages[0]
     }
+    return shareObj;
   },
   makeAlso : function(){
     wx.redirectTo({

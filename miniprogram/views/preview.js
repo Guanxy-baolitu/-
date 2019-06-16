@@ -13,12 +13,10 @@ function init(that, album_cloudid) {
     return;
   }
   const db = wx.cloud.database()
-  // 查询当前用户所有的 counters
   db.collection('albums').where({
     _id: album_cloudid
   }).get({
     success: res => {
-      console.log(res);
       fillAlbumPages(res.data[0], res.data[0].template);
     },
     fail: err => {
@@ -44,7 +42,6 @@ function fillAlbumPages(album, tmplate){
   wx.setNavigationBarTitle({
     title: album.albumTitle
   })
-  console.log(__that);
   $digest(__that);
 }
 
